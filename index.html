@@ -54,6 +54,41 @@
       #progress-bar {
         height: 10px;
       }
+
+      /* Print styles to show only the report section and all four report pages */
+      @media print {
+        /* Hide everything except the report */
+        body * {
+          visibility: hidden;
+        }
+        #results,
+        #results * {
+          visibility: visible;
+        }
+        #results {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+        }
+        /* Force all tabs content to display in print */
+        #graph-tab,
+        #details-tab,
+        #explanation-tab,
+        #recommendations-tab {
+          display: block !important;
+        }
+        /* Optional: add page breaks between sections */
+        #graph-tab {
+          page-break-after: always;
+        }
+        #details-tab {
+          page-break-after: always;
+        }
+        #explanation-tab {
+          page-break-after: always;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1657,7 +1692,7 @@
           return gaps.slice(0, 3);
         }
 
-        // Print results
+        // Print results – only the report section will be printed because of the print CSS
         document
           .getElementById("print-results")
           .addEventListener("click", function () {
