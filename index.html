@@ -1,1317 +1,1676 @@
 <!DOCTYPE html>
 <html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Organisatiecultuur Diagnose</title>
     <!-- Materialize CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <style>
-        .culture-icon {
-            font-size: 64px;
-            color: #26a69a;
-        }
-        .culture-card {
-            height: 100%;
-        }
-        .hidden {
-            display: none;
-        }
-        .question-card {
-            margin-bottom: 20px;
-        }
-        .results-card {
-            padding: 20px;
-        }
-        canvas {
-            max-width: 100%;
-        }
-        [type="radio"]:checked+span:after {
-            background-color: #26a69a;
-            border: 2px solid #26a69a;
-        }
-        .tabs .tab a {
-            color: #26a69a;
-        }
-        .tabs .tab a:hover, .tabs .tab a.active {
-            color: #26a69a;
-            background-color: rgba(38, 166, 154, 0.1);
-        }
-        .tabs .indicator {
-            background-color: #26a69a;
-        }
-        .progress-container {
-            margin: 20px 0;
-        }
-        #progress-bar {
-            height: 10px;
-        }
+      .culture-icon {
+        font-size: 64px;
+        color: #26a69a;
+      }
+      .culture-card {
+        height: 100%;
+      }
+      .hidden {
+        display: none;
+      }
+      .question-card {
+        margin-bottom: 20px;
+      }
+      .results-card {
+        padding: 20px;
+      }
+      canvas {
+        max-width: 100%;
+      }
+      [type="radio"]:checked + span:after {
+        background-color: #26a69a;
+        border: 2px solid #26a69a;
+      }
+      .tabs .tab a {
+        color: #26a69a;
+      }
+      .tabs .tab a:hover,
+      .tabs .tab a.active {
+        color: #26a69a;
+        background-color: rgba(38, 166, 154, 0.1);
+      }
+      .tabs .indicator {
+        background-color: #26a69a;
+      }
+      .progress-container {
+        margin: 20px 0;
+      }
+      #progress-bar {
+        height: 10px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
+      <!-- Welcome Section -->
+      <div id="welcome-section">
         <div class="row">
-            <div class="col s12">
-                <h1 class="center-align">Organisatiecultuur Diagnose</h1>
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">Welkom bij de cultuurdiagnose tool</span>
-                        <p>Deze tool is gebaseerd op het model van Harrison die organisatieculturen verdeelt in vier typen:</p>
-                        <div class="row">
-                            <div class="col s12 m3">
-                                <div class="card culture-card">
-                                    <div class="card-content center-align">
-                                        <i class="material-icons culture-icon">device_hub</i>
-                                        <h5>Machtscultuur</h5>
-                                        <p>"De spin in het web"</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m3">
-                                <div class="card culture-card">
-                                    <div class="card-content center-align">
-                                        <i class="material-icons culture-icon">account_balance</i>
-                                        <h5>Rolcultuur</h5>
-                                        <p>"De Griekse tempel"</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m3">
-                                <div class="card culture-card">
-                                    <div class="card-content center-align">
-                                        <i class="material-icons culture-icon">group_work</i>
-                                        <h5>Taakcultuur</h5>
-                                        <p>"Het netwerk"</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s12 m3">
-                                <div class="card culture-card">
-                                    <div class="card-content center-align">
-                                        <i class="material-icons culture-icon">person</i>
-                                        <h5>Individucultuur</h5>
-                                        <p>"Losse individuen"</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12">
-                                <h5>Instructies:</h5>
-                                <ol>
-                                    <li>Bij elke vraag kiest u één antwoord dat het beste past bij uw <strong>huidige werksituatie</strong>.</li>
-                                    <li>Daarnaast kiest u één antwoord dat het beste past bij uw <strong>ideale werksituatie</strong>.</li>
-                                    <li>Na het invullen van alle vragen krijgt u een analyse van de cultuurtypen.</li>
-                                </ol>
-                                <div class="center-align">
-                                    <button id="start-test" class="btn waves-effect waves-light">Start de test</button>
-                                </div>
-                            </div>
-                        </div>
+          <div class="col s12">
+            <h1 class="center-align">Organisatiecultuur Diagnose</h1>
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title"
+                  >Welkom bij de cultuurdiagnose tool</span
+                >
+                <p>
+                  Deze tool is gebaseerd op het model van Harrison die
+                  organisatieculturen verdeelt in vier typen:
+                </p>
+                <div class="row">
+                  <div class="col s12 m3">
+                    <div class="card culture-card">
+                      <div class="card-content center-align">
+                        <i class="material-icons culture-icon">device_hub</i>
+                        <h5>Machtscultuur</h5>
+                        <p>"De spin in het web"</p>
+                      </div>
                     </div>
+                  </div>
+                  <div class="col s12 m3">
+                    <div class="card culture-card">
+                      <div class="card-content center-align">
+                        <i class="material-icons culture-icon"
+                          >account_balance</i
+                        >
+                        <h5>Rolcultuur</h5>
+                        <p>"De Griekse tempel"</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m3">
+                    <div class="card culture-card">
+                      <div class="card-content center-align">
+                        <i class="material-icons culture-icon">group_work</i>
+                        <h5>Taakcultuur</h5>
+                        <p>"Het netwerk"</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s12 m3">
+                    <div class="card culture-card">
+                      <div class="card-content center-align">
+                        <i class="material-icons culture-icon">person</i>
+                        <h5>Individucultuur</h5>
+                        <p>"Losse individuen"</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <div class="row">
+                  <div class="col s12">
+                    <h5>Instructies:</h5>
+                    <ul class="browser-default">
+                      <li>
+                        Bij elke vraag kiest u één antwoord dat het beste past
+                        bij uw <strong>huidige werksituatie</strong>.
+                      </li>
+                      <li>
+                        Daarnaast kiest u één antwoord dat het beste past bij uw
+                        <strong>ideale werksituatie</strong>.
+                      </li>
+                      <li>
+                        Na het invullen van alle vragen krijgt u een analyse van
+                        de cultuurtypen.
+                      </li>
+                    </ul>
+                    <div class="center-align">
+                      <button
+                        id="start-test"
+                        class="btn waves-effect waves-light"
+                      >
+                        Start de test
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- end welcome-section -->
+
+      <!-- Progress bar -->
+      <div class="progress-container hidden">
+        <div class="progress">
+          <div id="progress-bar" class="determinate" style="width: 0%"></div>
+        </div>
+        <p class="center-align">
+          <span id="current-question">0</span>/10 vragen beantwoord
+        </p>
+      </div>
+
+      <!-- Test form -->
+      <form id="culture-test" class="hidden">
+        <!-- Item A -->
+        <div class="row question-card" data-question="A">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag A: Besluitvorming</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_A"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Teamleden nemen onafhankelijk beslissingen zonder
+                          rekening te houden met beslissingen van anderen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_A" type="radio" value="2" />
+                        <span
+                          >Arbitrage (derde partij) wordt gebruikt om te komen
+                          tot een beslissing die gerespecteerd wordt door het
+                          team en vooral daarbuiten.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_A" type="radio" value="3" />
+                        <span
+                          >Men neemt gezamenlijke beslissingen of beraadslaagt
+                          daarover.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_A" type="radio" value="4" />
+                        <span
+                          >Er is grote vrijheid voor individuele
+                          besluitvorming.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_A" type="radio" value="1" required />
+                        <span
+                          >Teamleden nemen onafhankelijk beslissingen zonder
+                          rekening te houden met beslissingen van anderen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_A" type="radio" value="2" />
+                        <span
+                          >Arbitrage (derde partij) wordt gebruikt om te komen
+                          tot een beslissing die gerespecteerd wordt door het
+                          team en vooral daarbuiten.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_A" type="radio" value="3" />
+                        <span
+                          >Men neemt gezamenlijke beslissingen of beraadslaagt
+                          daarover.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_A" type="radio" value="4" />
+                        <span
+                          >Er is grote vrijheid voor individuele
+                          besluitvorming.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Progress bar -->
-        <div class="progress-container hidden">
-            <div class="progress">
-                <div id="progress-bar" class="determinate" style="width: 0%"></div>
+        <!-- Item B -->
+        <div class="row question-card" data-question="B">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag B: Kritiek</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_B"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Kritiek is gericht op de taak en niet op
+                          personen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_B" type="radio" value="2" />
+                        <span
+                          >Kritiek wordt alleen gegeven wanneer erom wordt
+                          gevraagd.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_B" type="radio" value="3" />
+                        <span
+                          >Er worden hoofdzakelijk verwijten gemaakt; er is
+                          afbrekende kritiek.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_B" type="radio" value="4" />
+                        <span
+                          >Men geeft niet graag kritiek omdat men bang is een
+                          ander pijn te doen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_B" type="radio" value="1" required />
+                        <span
+                          >Kritiek is gericht op de taak en niet op
+                          personen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_B" type="radio" value="2" />
+                        <span
+                          >Kritiek wordt alleen gegeven wanneer erom wordt
+                          gevraagd.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_B" type="radio" value="3" />
+                        <span
+                          >Er worden hoofdzakelijk verwijten gemaakt; er is
+                          afbrekende kritiek.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_B" type="radio" value="4" />
+                        <span
+                          >Men geeft niet graag kritiek omdat men bang is een
+                          ander pijn te doen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <p class="center-align"><span id="current-question">0</span>/10 vragen beantwoord</p>
+          </div>
         </div>
 
-        <!-- Test form -->
-        <form id="culture-test" class="hidden">
-            <!-- Item A -->
-            <div class="row question-card" data-question="A">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag A: Besluitvorming</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_A" type="radio" value="1" required />
-                                            <span>1. Teamleden nemen onafhankelijk beslissingen zonder rekening te houden met beslissingen van anderen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_A" type="radio" value="2" />
-                                            <span>2. Arbitrage (derde partij) wordt gebruikt om te komen tot een beslissing die gerespecteerd wordt door het team en vooral daarbuiten.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_A" type="radio" value="3" />
-                                            <span>3. Men neemt gezamenlijke beslissingen of beraadslaagt daarover.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_A" type="radio" value="4" />
-                                            <span>4. Er is grote vrijheid voor individuele besluitvorming.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_A" type="radio" value="1" required />
-                                            <span>1. Teamleden nemen onafhankelijk beslissingen zonder rekening te houden met beslissingen van anderen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_A" type="radio" value="2" />
-                                            <span>2. Arbitrage (derde partij) wordt gebruikt om te komen tot een beslissing die gerespecteerd wordt door het team en vooral daarbuiten.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_A" type="radio" value="3" />
-                                            <span>3. Men neemt gezamenlijke beslissingen of beraadslaagt daarover.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_A" type="radio" value="4" />
-                                            <span>4. Er is grote vrijheid voor individuele besluitvorming.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item C -->
+        <div class="row question-card" data-question="C">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag C: Doelstellingen</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_C"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >De doelstellingen van het bedrijf worden gevoeld als
+                          niet-realistisch en kunstmatig. Er wordt alleen naar
+                          verwezen als ze ten eigen voordele gebruikt kunnen
+                          worden.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_C" type="radio" value="2" />
+                        <span
+                          >Over bedrijfsdoelstellingen wordt gesproken, ze
+                          worden opgeschreven en gelezen. Vervolgens worden ze
+                          opgeborgen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_C" type="radio" value="3" />
+                        <span
+                          >Teamdoelstellingen worden ontleend aan en zijn in
+                          overeenstemming met bedrijfsdoelstellingen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_C" type="radio" value="4" />
+                        <span
+                          >Team- en bedrijfsdoelstellingen vormen geen
+                          belemmering voor het realiseren van persoonlijke
+                          doelstellingen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_C" type="radio" value="1" required />
+                        <span
+                          >De doelstellingen van het bedrijf worden gevoeld als
+                          niet-realistisch en kunstmatig. Er wordt alleen naar
+                          verwezen als ze ten eigen voordele gebruikt kunnen
+                          worden.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_C" type="radio" value="2" />
+                        <span
+                          >Over bedrijfsdoelstellingen wordt gesproken, ze
+                          worden opgeschreven en gelezen. Vervolgens worden ze
+                          opgeborgen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_C" type="radio" value="3" />
+                        <span
+                          >Teamdoelstellingen worden ontleend aan en zijn in
+                          overeenstemming met bedrijfsdoelstellingen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_C" type="radio" value="4" />
+                        <span
+                          >Team- en bedrijfsdoelstellingen vormen geen
+                          belemmering voor het realiseren van persoonlijke
+                          doelstellingen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Item B -->
-            <div class="row question-card" data-question="B">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag B: Kritiek</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_B" type="radio" value="1" required />
-                                            <span>1. Kritiek is gericht op de taak en niet op personen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_B" type="radio" value="2" />
-                                            <span>2. Kritiek wordt alleen gegeven wanneer erom wordt gevraagd.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_B" type="radio" value="3" />
-                                            <span>3. Er worden hoofdzakelijk verwijten gemaakt; er is afbrekende kritiek.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_B" type="radio" value="4" />
-                                            <span>4. Men geeft niet graag kritiek omdat men bang is een ander pijn te doen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_B" type="radio" value="1" required />
-                                            <span>1. Kritiek is gericht op de taak en niet op personen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_B" type="radio" value="2" />
-                                            <span>2. Kritiek wordt alleen gegeven wanneer erom wordt gevraagd.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_B" type="radio" value="3" />
-                                            <span>3. Er worden hoofdzakelijk verwijten gemaakt; er is afbrekende kritiek.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_B" type="radio" value="4" />
-                                            <span>4. Men geeft niet graag kritiek omdat men bang is een ander pijn te doen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item D -->
+        <div class="row question-card" data-question="D">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag D: Initiatief</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_D"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Men toont initiatief zodra zich een probleem
+                          voordoet.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_D" type="radio" value="2" />
+                        <span
+                          >Initiatieven worden ontwikkeld zonder dat er door
+                          iemand anders om wordt gevraagd.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_D" type="radio" value="3" />
+                        <span
+                          >Men neemt alleen initiatief als er duidelijk
+                          gelegenheid is er zelf beter van te worden.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_D" type="radio" value="4" />
+                        <span
+                          >Men neemt veelal initiatief op verzoek van anderen,
+                          gewoonlijk van mensen op een hoger gezagsniveau.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_D" type="radio" value="1" required />
+                        <span
+                          >Men toont initiatief zodra zich een probleem
+                          voordoet.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_D" type="radio" value="2" />
+                        <span
+                          >Initiatieven worden ontwikkeld zonder dat er door
+                          iemand anders om wordt gevraagd.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_D" type="radio" value="3" />
+                        <span
+                          >Men neemt alleen initiatief als er duidelijk
+                          gelegenheid is er zelf beter van te worden.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_D" type="radio" value="4" />
+                        <span
+                          >Men neemt veelal initiatief op verzoek van anderen,
+                          gewoonlijk van mensen op een hoger gezagsniveau.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Item C -->
-            <div class="row question-card" data-question="C">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag C: Doelstellingen</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_C" type="radio" value="1" required />
-                                            <span>1. De doelstellingen van het bedrijf worden gevoeld als niet-realistisch en kunstmatig. Er wordt alleen naar verwezen als ze ten eigen voordele gebruikt kunnen worden.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_C" type="radio" value="2" />
-                                            <span>2. Over bedrijfsdoelstellingen wordt gesproken, ze worden opgeschreven en gelezen. Vervolgens worden ze opgeborgen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_C" type="radio" value="3" />
-                                            <span>3. Teamdoelstellingen worden ontleend aan en zijn in overeenstemming met bedrijfsdoelstellingen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_C" type="radio" value="4" />
-                                            <span>4. Team- en bedrijfsdoelstellingen vormen geen belemmering voor het realiseren van persoonlijke doelstellingen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_C" type="radio" value="1" required />
-                                            <span>1. De doelstellingen van het bedrijf worden gevoeld als niet-realistisch en kunstmatig. Er wordt alleen naar verwezen als ze ten eigen voordele gebruikt kunnen worden.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_C" type="radio" value="2" />
-                                            <span>2. Over bedrijfsdoelstellingen wordt gesproken, ze worden opgeschreven en gelezen. Vervolgens worden ze opgeborgen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_C" type="radio" value="3" />
-                                            <span>3. Teamdoelstellingen worden ontleend aan en zijn in overeenstemming met bedrijfsdoelstellingen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_C" type="radio" value="4" />
-                                            <span>4. Team- en bedrijfsdoelstellingen vormen geen belemmering voor het realiseren van persoonlijke doelstellingen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item E -->
+        <div class="row question-card" data-question="E">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag E: Conflicten</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_E"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >In relaties tussen teamleden spelen openlijke of
+                          verborgen conflicten een belangrijke rol.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_E" type="radio" value="2" />
+                        <span>Goede relaties zijn vrij van conflict.</span>
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_E" type="radio" value="3" />
+                        <span
+                          >Conflicten worden erkend en geaccepteerd. Ze worden
+                          niet als "pijnlijk" ervaren.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_E" type="radio" value="4" />
+                        <span
+                          >Men kan ermee instemmen dat conflicten die niet tot
+                          een totale breuk leiden, niet per se opgelost hoeven
+                          te worden.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_E" type="radio" value="1" required />
+                        <span
+                          >In relaties tussen teamleden spelen openlijke of
+                          verborgen conflicten een belangrijke rol.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_E" type="radio" value="2" />
+                        <span>Goede relaties zijn vrij van conflict.</span>
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_E" type="radio" value="3" />
+                        <span
+                          >Conflicten worden erkend en geaccepteerd. Ze worden
+                          niet als "pijnlijk" ervaren.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_E" type="radio" value="4" />
+                        <span
+                          >Men kan ermee instemmen dat conflicten die niet tot
+                          een totale breuk leiden, niet per se opgelost hoeven
+                          te worden.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Vragen D t/m J volgen hetzelfde patroon... -->
-            <!-- Item D -->
-            <div class="row question-card" data-question="D">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag D: Initiatief</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_D" type="radio" value="1" required />
-                                            <span>1. Men toont initiatief zodra zich een probleem voordoet.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_D" type="radio" value="2" />
-                                            <span>2. Initiatieven worden ontwikkeld zonder dat er door iemand anders om wordt gevraagd.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_D" type="radio" value="3" />
-                                            <span>3. Men neemt alleen initiatief als er duidelijk gelegenheid is er zelf beter van te worden.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_D" type="radio" value="4" />
-                                            <span>4. Men neemt veelal initiatief op verzoek van anderen, gewoonlijk van mensen op een hoger gezagsniveau.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_D" type="radio" value="1" required />
-                                            <span>1. Men toont initiatief zodra zich een probleem voordoet.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_D" type="radio" value="2" />
-                                            <span>2. Initiatieven worden ontwikkeld zonder dat er door iemand anders om wordt gevraagd.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_D" type="radio" value="3" />
-                                            <span>3. Men neemt alleen initiatief als er duidelijk gelegenheid is er zelf beter van te worden.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_D" type="radio" value="4" />
-                                            <span>4. Men neemt veelal initiatief op verzoek van anderen, gewoonlijk van mensen op een hoger gezagsniveau.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item F -->
+        <div class="row question-card" data-question="F">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag F: Besluitvorming</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_F"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Voordat beslissingen definitief worden genomen, wordt
+                          eerst de stemming gepeild, zowel in als buiten het
+                          team. Beslissingen zijn meestal compromissen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_F" type="radio" value="2" />
+                        <span
+                          >Als bij nadere beschouwing een beslissing gewijzigd
+                          moet worden, geeft dit geen persoonlijke
+                          problemen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_F" type="radio" value="3" />
+                        <span
+                          >Beslissingen worden gebaseerd op een geheel van
+                          criteria die van toepassing zijn ten aanzien van taken
+                          zowel als van mensen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_F" type="radio" value="4" />
+                        <span
+                          >Er zit geen lijn in de beslissingen die worden
+                          genomen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_F" type="radio" value="1" required />
+                        <span
+                          >Voordat beslissingen definitief worden genomen, wordt
+                          eerst de stemming gepeild, zowel in als buiten het
+                          team. Beslissingen zijn meestal compromissen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_F" type="radio" value="2" />
+                        <span
+                          >Als bij nadere beschouwing een beslissing gewijzigd
+                          moet worden, geeft dit geen persoonlijke
+                          problemen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_F" type="radio" value="3" />
+                        <span
+                          >Beslissingen worden gebaseerd op een geheel van
+                          criteria die van toepassing zijn ten aanzien van taken
+                          zowel als van mensen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_F" type="radio" value="4" />
+                        <span
+                          >Er zit geen lijn in de beslissingen die worden
+                          genomen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Item E -->
-            <div class="row question-card" data-question="E">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag E: Conflicten</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_E" type="radio" value="1" required />
-                                            <span>1. In relaties tussen teamleden spelen openlijke of verborgen conflicten een belangrijke rol.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_E" type="radio" value="2" />
-                                            <span>2. Goede relaties zijn vrij van conflict.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_E" type="radio" value="3" />
-                                            <span>3. Conflicten worden erkend en geaccepteerd. Ze worden niet als "pijnlijk" ervaren.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_E" type="radio" value="4" />
-                                            <span>4. Men kan ermee instemmen dat conflicten die niet tot een totale breuk leiden, niet per se opgelost hoeven te worden.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_E" type="radio" value="1" required />
-                                            <span>1. In relaties tussen teamleden spelen openlijke of verborgen conflicten een belangrijke rol.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_E" type="radio" value="2" />
-                                            <span>2. Goede relaties zijn vrij van conflict.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_E" type="radio" value="3" />
-                                            <span>3. Conflicten worden erkend en geaccepteerd. Ze worden niet als "pijnlijk" ervaren.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_E" type="radio" value="4" />
-                                            <span>4. Men kan ermee instemmen dat conflicten die niet tot een totale breuk leiden, niet per se opgelost hoeven te worden.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item G -->
+        <div class="row question-card" data-question="G">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag G: Kritiek</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_G"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Het doel van kritiek geven is om mensen bewust te
+                          laten worden van wat ze aan het doen zijn.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_G" type="radio" value="2" />
+                        <span
+                          >Kritiek wordt gegeven met bijbedoelingen. Het uit
+                          zich vaak als gekanker.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_G" type="radio" value="3" />
+                        <span
+                          >Suggesties voor verbetering worden vaak op indirecte
+                          manier gegeven.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_G" type="radio" value="4" />
+                        <span
+                          >Kritiek is systematisch en bedoeld om ervan te
+                          leren.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_G" type="radio" value="1" required />
+                        <span
+                          >Het doel van kritiek geven is om mensen bewust te
+                          laten worden van wat ze aan het doen zijn.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_G" type="radio" value="2" />
+                        <span
+                          >Kritiek wordt gegeven met bijbedoelingen. Het uit
+                          zich vaak als gekanker.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_G" type="radio" value="3" />
+                        <span
+                          >Suggesties voor verbetering worden vaak op indirecte
+                          manier gegeven.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_G" type="radio" value="4" />
+                        <span
+                          >Kritiek is systematisch en bedoeld om ervan te
+                          leren.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Resterende vragen F t/m J... -->
-            <!-- Item F -->
-            <div class="row question-card" data-question="F">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag F: Besluitvorming</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_F" type="radio" value="1" required />
-                                            <span>1. Voordat beslissingen definitief worden genomen, wordt eerst de stemming gepeild, zowel in als buiten het team. Beslissingen zijn meestal compromissen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_F" type="radio" value="2" />
-                                            <span>2. Als bij nadere beschouwing een beslissing gewijzigd moet worden, geeft dit geen persoonlijke problemen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_F" type="radio" value="3" />
-                                            <span>3. Beslissingen worden gebaseerd op een geheel van criteria die van toepassing zijn ten aanzien van taken zowel als van mensen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_F" type="radio" value="4" />
-                                            <span>4. Er zit geen lijn in de beslissingen die worden genomen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_F" type="radio" value="1" required />
-                                            <span>1. Voordat beslissingen definitief worden genomen, wordt eerst de stemming gepeild, zowel in als buiten het team. Beslissingen zijn meestal compromissen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_F" type="radio" value="2" />
-                                            <span>2. Als bij nadere beschouwing een beslissing gewijzigd moet worden, geeft dit geen persoonlijke problemen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_F" type="radio" value="3" />
-                                            <span>3. Beslissingen worden gebaseerd op een geheel van criteria die van toepassing zijn ten aanzien van taken zowel als van mensen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_F" type="radio" value="4" />
-                                            <span>4. Er zit geen lijn in de beslissingen die worden genomen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item H -->
+        <div class="row question-card" data-question="H">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag H: Doelstellingen</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_H"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Teamdoelstellingen worden opgesteld omdat dat nu
+                          eenmaal moet. Men neemt aan dat ze nuttig zijn.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_H" type="radio" value="2" />
+                        <span
+                          >Teamdoelstellingen zijn duidelijk voor de teamleden.
+                          Ze geven aan het team een gevoel waar ze naartoe gaan
+                          en waarom.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_H" type="radio" value="3" />
+                        <span
+                          >Men is meer op zoek naar doelstellingen die
+                          vernieuwing en verdere persoonlijke ontplooiing
+                          teweegbrengen, dan dat men bestaande doelstellingen
+                          accepteert.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_H" type="radio" value="4" />
+                        <span
+                          >Doelstellingen worden gezien als een belemmering voor
+                          de uitvoering van het werk, vooral wanneer we steeds
+                          aan ze worden herinnerd.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_H" type="radio" value="1" required />
+                        <span
+                          >Teamdoelstellingen worden opgesteld omdat dat nu
+                          eenmaal moet. Men neemt aan dat ze nuttig zijn.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_H" type="radio" value="2" />
+                        <span
+                          >Teamdoelstellingen zijn duidelijk voor de teamleden.
+                          Ze geven aan het team een gevoel waar ze naartoe gaan
+                          en waarom.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_H" type="radio" value="3" />
+                        <span
+                          >Men is meer op zoek naar doelstellingen die
+                          vernieuwing en verdere persoonlijke ontplooiing
+                          teweegbrengen, dan dat men bestaande doelstellingen
+                          accepteert.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_H" type="radio" value="4" />
+                        <span
+                          >Doelstellingen worden gezien als een belemmering voor
+                          de uitvoering van het werk, vooral wanneer we steeds
+                          aan ze worden herinnerd.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Item G -->
-            <div class="row question-card" data-question="G">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag G: Kritiek</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_G" type="radio" value="1" required />
-                                            <span>1. Het doel van kritiek geven is om mensen bewust te laten worden van wat ze aan het doen zijn.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_G" type="radio" value="2" />
-                                            <span>2. Kritiek wordt gegeven met bijbedoelingen. Het uit zich vaak als gekanker.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_G" type="radio" value="3" />
-                                            <span>3. Suggesties voor verbetering worden vaak op indirecte manier gegeven.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_G" type="radio" value="4" />
-                                            <span>4. Kritiek is systematisch en bedoeld om ervan te leren.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_G" type="radio" value="1" required />
-                                            <span>1. Het doel van kritiek geven is om mensen bewust te laten worden van wat ze aan het doen zijn.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_G" type="radio" value="2" />
-                                            <span>2. Kritiek wordt gegeven met bijbedoelingen. Het uit zich vaak als gekanker.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_G" type="radio" value="3" />
-                                            <span>3. Suggesties voor verbetering worden vaak op indirecte manier gegeven.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_G" type="radio" value="4" />
-                                            <span>4. Kritiek is systematisch en bedoeld om ervan te leren.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item I -->
+        <div class="row question-card" data-question="I">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag I: Initiatief</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_I"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Men neemt initiatief om het hoofd te kunnen bieden
+                          aan problemen die zich, naar men verwacht, zullen
+                          voordoen in de nabije maar ook in de verre
+                          toekomst.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_I" type="radio" value="2" />
+                        <span
+                          >Alleen de directe gevolgen van het nemen van
+                          initiatief worden voorzien. Men staat weinig stil bij
+                          neveneffecten of gevolgen op lange termijn.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_I" type="radio" value="3" />
+                        <span
+                          >Initiatief wordt alleen genomen om uit de hand
+                          gelopen situaties naar het normale terug te brengen,
+                          om afwijkingen te corrigeren.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_I" type="radio" value="4" />
+                        <span
+                          >Bij het nemen van initiatief probeert men niet alleen
+                          corrigerend op te treden, maar vooral ook
+                          vernieuwingen te bewerkstelligen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_I" type="radio" value="1" required />
+                        <span
+                          >Men neemt initiatief om het hoofd te kunnen bieden
+                          aan problemen die zich, naar men verwacht, zullen
+                          voordoen in de nabije maar ook in de verre
+                          toekomst.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_I" type="radio" value="2" />
+                        <span
+                          >Alleen de directe gevolgen van het nemen van
+                          initiatief worden voorzien. Men staat weinig stil bij
+                          neveneffecten of gevolgen op lange termijn.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_I" type="radio" value="3" />
+                        <span
+                          >Initiatief wordt alleen genomen om uit de hand
+                          gelopen situaties naar het normale terug te brengen,
+                          om afwijkingen te corrigeren.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_I" type="radio" value="4" />
+                        <span
+                          >Bij het nemen van initiatief probeert men niet alleen
+                          corrigerend op te treden, maar vooral ook
+                          vernieuwingen te bewerkstelligen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Item H -->
-            <div class="row question-card" data-question="H">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag H: Doelstellingen</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_H" type="radio" value="1" required />
-                                            <span>1. Teamdoelstellingen worden opgesteld omdat dat nu eenmaal moet. Men neemt aan dat ze nuttig zijn.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_H" type="radio" value="2" />
-                                            <span>2. Teamdoelstellingen zijn duidelijk voor de teamleden. Ze geven aan het team een gevoel waar ze naartoe gaan en waarom.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_H" type="radio" value="3" />
-                                            <span>3. Men is meer op zoek naar doelstellingen die vernieuwing en verdere persoonlijke ontplooiing teweegbrengen, dan dat men bestaande doelstellingen accepteert.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_H" type="radio" value="4" />
-                                            <span>4. Doelstellingen worden gezien als een belemmering voor de uitvoering van het werk, vooral wanneer we steeds aan ze worden herinnerd.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_H" type="radio" value="1" required />
-                                            <span>1. Teamdoelstellingen worden opgesteld omdat dat nu eenmaal moet. Men neemt aan dat ze nuttig zijn.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_H" type="radio" value="2" />
-                                            <span>2. Teamdoelstellingen zijn duidelijk voor de teamleden. Ze geven aan het team een gevoel waar ze naartoe gaan en waarom.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_H" type="radio" value="3" />
-                                            <span>3. Men is meer op zoek naar doelstellingen die vernieuwing en verdere persoonlijke ontplooiing teweegbrengen, dan dat men bestaande doelstellingen accepteert.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_H" type="radio" value="4" />
-                                            <span>4. Doelstellingen worden gezien als een belemmering voor de uitvoering van het werk, vooral wanneer we steeds aan ze worden herinnerd.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Item J -->
+        <div class="row question-card" data-question="J">
+          <div class="col s12">
+            <div class="card">
+              <div class="card-content">
+                <span class="card-title">Vraag J: Conflicten</span>
+                <div class="row">
+                  <div class="col s12 m6">
+                    <h6>Huidige situatie</h6>
+                    <p>
+                      <label>
+                        <input
+                          name="current_J"
+                          type="radio"
+                          value="1"
+                          required
+                        />
+                        <span
+                          >Waar het bij het benaderen van een conflict werkelijk
+                          omgaat, is om mensen niet in verlegenheid te brengen
+                          en onbehagen te voorkomen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_J" type="radio" value="2" />
+                        <span
+                          >De hoofdzaak van een conflict is het oplossen van het
+                          probleem dat erachter ligt.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_J" type="radio" value="3" />
+                        <span
+                          >Belangrijk is wat we kunnen leren van het conflict en
+                          welke positieve veranderingen uit het conflict naar
+                          voren kunnen komen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="current_J" type="radio" value="4" />
+                        <span
+                          >Waar het bij een conflict om gaat, is om niet te
+                          verliezen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
+                  <div class="col s12 m6">
+                    <h6>Ideale situatie</h6>
+                    <p>
+                      <label>
+                        <input name="ideal_J" type="radio" value="1" required />
+                        <span
+                          >Waar het bij het benaderen van een conflict werkelijk
+                          omgaat, is om mensen niet in verlegenheid te brengen
+                          en onbehagen te voorkomen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_J" type="radio" value="2" />
+                        <span
+                          >De hoofdzaak van een conflict is het oplossen van het
+                          probleem dat erachter ligt.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_J" type="radio" value="3" />
+                        <span
+                          >Belangrijk is wat we kunnen leren van het conflict en
+                          welke positieve veranderingen uit het conflict naar
+                          voren kunnen komen.</span
+                        >
+                      </label>
+                    </p>
+                    <p>
+                      <label>
+                        <input name="ideal_J" type="radio" value="4" />
+                        <span
+                          >Waar het bij een conflict om gaat, is om niet te
+                          verliezen.</span
+                        >
+                      </label>
+                    </p>
+                  </div>
                 </div>
+              </div>
             </div>
+          </div>
+        </div>
 
-            <!-- Item I -->
-            <div class="row question-card" data-question="I">
+        <div class="row">
+          <div class="col s12 center-align">
+            <button
+              id="calculate-results-btn"
+              type="button"
+              class="btn-large waves-effect waves-light"
+            >
+              Bereken resultaten
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Results section -->
+      <div id="results" class="hidden">
+        <div class="row">
+          <div class="col s12">
+            <div class="card results-card">
+              <h4 class="center-align">Uw organisatiecultuur diagnose</h4>
+              <div class="row">
                 <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag I: Initiatief</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_I" type="radio" value="1" required />
-                                            <span>1. Men neemt initiatief om het hoofd te kunnen bieden aan problemen die zich, naar men verwacht, zullen voordoen in de nabije maar ook in de verre toekomst.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_I" type="radio" value="2" />
-                                            <span>2. Alleen de directe gevolgen van het nemen van initiatief worden voorzien. Men staat weinig stil bij neveneffecten of gevolgen op lange termijn.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_I" type="radio" value="3" />
-                                            <span>3. Initiatief wordt alleen genomen om uit de hand gelopen situaties naar het normale terug te brengen, om afwijkingen te corrigeren.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_I" type="radio" value="4" />
-                                            <span>4. Bij het nemen van initiatief probeert men niet alleen corrigerend op te treden, maar vooral ook vernieuwingen te bewerkstelligen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_I" type="radio" value="1" required />
-                                            <span>1. Men neemt initiatief om het hoofd te kunnen bieden aan problemen die zich, naar men verwacht, zullen voordoen in de nabije maar ook in de verre toekomst.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_I" type="radio" value="2" />
-                                            <span>2. Alleen de directe gevolgen van het nemen van initiatief worden voorzien. Men staat weinig stil bij neveneffecten of gevolgen op lange termijn.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_I" type="radio" value="3" />
-                                            <span>3. Initiatief wordt alleen genomen om uit de hand gelopen situaties naar het normale terug te brengen, om afwijkingen te corrigeren.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_I" type="radio" value="4" />
-                                            <span>4. Bij het nemen van initiatief probeert men niet alleen corrigerend op te treden, maar vooral ook vernieuwingen te bewerkstelligen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <ul class="tabs">
+                    <li class="tab col s3">
+                      <a href="#graph-tab" class="active">Scores</a>
+                    </li>
+                    <li class="tab col s3">
+                      <a href="#details-tab">Detailanalyse</a>
+                    </li>
+                    <li class="tab col s3">
+                      <a href="#explanation-tab">Toelichting</a>
+                    </li>
+                    <li class="tab col s3">
+                      <a href="#recommendations-tab">Aanbevelingen</a>
+                    </li>
+                  </ul>
                 </div>
-            </div>
-
-            <!-- Item J -->
-            <div class="row question-card" data-question="J">
-                <div class="col s12">
-                    <div class="card">
-                        <div class="card-content">
-                            <span class="card-title">Vraag J: Conflicten</span>
-                            <div class="row">
-                                <div class="col s12 m6">
-                                    <h6>Huidige situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="current_J" type="radio" value="1" required />
-                                            <span>1. Waar het bij het benaderen van een conflict werkelijk omgaat, is om mensen niet in verlegenheid te brengen en onbehagen te voorkomen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_J" type="radio" value="2" />
-                                            <span>2. De hoofdzaak van een conflict is het oplossen van het probleem dat erachter ligt.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_J" type="radio" value="3" />
-                                            <span>3. Belangrijk is wat we kunnen leren van het conflict en welke positieve veranderingen uit het conflict naar voren kunnen komen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="current_J" type="radio" value="4" />
-                                            <span>4. Waar het bij een conflict om gaat, is om niet te verliezen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                                <div class="col s12 m6">
-                                    <h6>Ideale situatie</h6>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_J" type="radio" value="1" required />
-                                            <span>1. Waar het bij het benaderen van een conflict werkelijk omgaat, is om mensen niet in verlegenheid te brengen en onbehagen te voorkomen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_J" type="radio" value="2" />
-                                            <span>2. De hoofdzaak van een conflict is het oplossen van het probleem dat erachter ligt.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_J" type="radio" value="3" />
-                                            <span>3. Belangrijk is wat we kunnen leren van het conflict en welke positieve veranderingen uit het conflict naar voren kunnen komen.</span>
-                                        </label>
-                                    </p>
-                                    <p>
-                                        <label>
-                                            <input name="ideal_J" type="radio" value="4" />
-                                            <span>4. Waar het bij een conflict om gaat, is om niet te verliezen.</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                <div id="graph-tab" class="col s12">
+                  <div class="row">
+                    <div class="col s12">
+                      <h5 class="center-align">Cultuurtypen Scores</h5>
                     </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m6">
+                      <h6 class="center-align">Huidige Situatie</h6>
+                      <ul class="collection" id="current-scores">
+                        <!-- Data will be inserted here by JavaScript -->
+                      </ul>
+                    </div>
+                    <div class="col s12 m6">
+                      <h6 class="center-align">Ideale Situatie</h6>
+                      <ul class="collection" id="ideal-scores">
+                        <!-- Data will be inserted here by JavaScript -->
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-            </div>
-
-            <div class="row">
+                <div id="details-tab" class="col s12">
+                  <div class="row">
+                    <div class="col s12">
+                      <h5>Detailanalyse per categorie</h5>
+                      <table class="striped">
+                        <thead>
+                          <tr>
+                            <th>Vraag</th>
+                            <th>Aspect</th>
+                            <th>Huidige Cultuur</th>
+                            <th>Ideale Cultuur</th>
+                          </tr>
+                        </thead>
+                        <tbody id="details-table">
+                          <!-- Data will be inserted here by JavaScript -->
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div id="explanation-tab" class="col s12">
+                  <div class="row">
+                    <div class="col s12 m6">
+                      <h5>Machtscultuur</h5>
+                      <p>
+                        De centrale machtsfiguur zit als een spin in het web.
+                        Weinig regels en procedures. Succes hangt af van de
+                        kwaliteit van de centrale figuur. Medewerkers zijn
+                        machtsbewust, politiek bewust en risicobereid. Alleen
+                        het financiële resultaat telt.
+                      </p>
+                    </div>
+                    <div class="col s12 m6">
+                      <h5>Rolcultuur</h5>
+                      <p>
+                        Structuur als een Griekse tempel met functioneel
+                        gespecialiseerde afdelingen. Medewerkers houden zich aan
+                        voorschriften. Degelijkheid en stabiliteit zijn
+                        belangrijk. Coördinatie door topmanagers. Regels en
+                        procedures zijn de sturingsinstrumenten.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col s12 m6">
+                      <h5>Taakcultuur</h5>
+                      <p>
+                        Bereiken van taakstelling staat centraal. Teamverband
+                        waar specifieke deskundigheden worden aangewend. Snel
+                        bereid afspraken en regels te veranderen als de taak
+                        daarom vraagt. Structuur van project/matrixorganisatie.
+                        Resultaat van groepswerk staat voorop.
+                      </p>
+                    </div>
+                    <div class="col s12 m6">
+                      <h5>Individucultuur</h5>
+                      <p>
+                        Het individu staat centraal. De organisatie bestaat om
+                        de wensen van individuele leden te honoreren. Men doet
+                        wat men leuk vindt en waar men goed in is. Groepen
+                        vormen op basis van persoonlijke voorkeuren en
+                        behoeften. Beïnvloeding op basis van
+                        deskundigheden/persoonlijkheid.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div id="recommendations-tab" class="col s12">
+                  <div class="row">
+                    <div class="col s12">
+                      <h5>Aanbevelingen</h5>
+                      <div id="recommendations-content">
+                        <!-- Aanbevelingen worden hier ingevuld door JavaScript -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
                 <div class="col s12 center-align">
-                    <button type="submit" class="btn-large waves-effect waves-light">Bereken resultaten</button>
+                  <button
+                    id="print-results"
+                    class="btn waves-effect waves-light"
+                  >
+                    Afdrukken
+                  </button>
+                  <button
+                    id="restart-test"
+                    class="btn waves-effect waves-light"
+                  >
+                    Opnieuw testen
+                  </button>
                 </div>
+              </div>
             </div>
-        </form>
-
-        <!-- Results section -->
-        <div id="results" class="hidden">
-            <div class="row">
-                <div class="col s12">
-                    <div class="card results-card">
-                        <h4 class="center-align">Uw organisatiecultuur diagnose</h4>
-                        <div class="row">
-                            <div class="col s12">
-                                <ul class="tabs">
-                                    <li class="tab col s3"><a href="#graph-tab" class="active">Grafiek</a></li>
-                                    <li class="tab col s3"><a href="#details-tab">Detailanalyse</a></li>
-                                    <li class="tab col s3"><a href="#explanation-tab">Toelichting</a></li>
-                                    <li class="tab col s3"><a href="#recommendations-tab">Aanbevelingen</a></li>
-                                </ul>
-                            </div>
-                            <div id="graph-tab" class="col s12">
-                                <div class="row">
-                                    <div class="col s12 m8 offset-m2">
-                                        <canvas id="radar-chart"></canvas>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s12 m6">
-                                        <h5 class="center-align">Huidige Situatie</h5>
-                                        <ul class="collection" id="current-scores">
-                                            <!-- Data will be inserted here by JavaScript -->
-                                        </ul>
-                                    </div>
-                                    <div class="col s12 m6">
-                                        <h5 class="center-align">Ideale Situatie</h5>
-                                        <ul class="collection" id="ideal-scores">
-                                            <!-- Data will be inserted here by JavaScript -->
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="details-tab" class="col s12">
-                                <div class="row">
-                                    <div class="col s12">
-                                        <h5>Detailanalyse per categorie</h5>
-                                        <table class="striped">
-                                            <thead>
-                                                <tr>
-                                                    <th>Categorie</th>
-                                                    <th>Aspect</th>
-                                                    <th>Huidige Score</th>
-                                                    <th>Ideale Score</th>
-                                                    <th>Verschil</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="details-table">
-                                                <!-- Data will be inserted here by JavaScript -->
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="explanation-tab" class="col s12">
-                                <div class="row">
-                                    <div class="col s12 m6">
-                                        <h5>Machtscultuur</h5>
-                                        <p>De centrale machtsfiguur zit als een spin in het web. Weinig regels en procedures. Succes hangt af van de kwaliteit van de centrale figuur. Medewerkers zijn machtsbewust, politiek bewust en risicobereid. Alleen het financiële resultaat telt.</p>
-                                    </div>
-                                    <div class="col s12 m6">
-                                        <h5>Rolcultuur</h5>
-                                        <p>Structuur als een Griekse tempel met functioneel gespecialiseerde afdelingen. Medewerkers houden zich aan voorschriften. Degelijkheid en stabiliteit zijn belangrijk. Coördinatie door topmanagers. Regels en procedures zijn de sturingsinstrumenten.</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col s12 m6">
-                                        <h5>Taakcultuur</h5>
-                                        <p>Bereiken van taakstelling staat centraal. Teamverband waar specifieke deskundigheden worden aangewend. Snel bereid afspraken en regels te veranderen als de taak daarom vraagt. Structuur van project/matrixorganisatie. Resultaat van groepswerk staat voorop.</p>
-                                    </div>
-                                    <div class="col s12 m6">
-                                        <h5>Individucultuur</h5>
-                                        <p>Het individu staat centraal. De organisatie bestaat om de wensen van individuele leden te honoreren. Men doet wat men leuk vindt en waar men goed in is. Groepen vormen op basis van persoonlijke voorkeuren en behoeften. Beïnvloeding op basis van deskundigheden/persoonlijkheid.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="recommendations-tab" class="col s12">
-                                <div class="row">
-                                    <div class="col s12">
-                                        <h5>Aanbevelingen</h5>
-                                        <div id="recommendations-content">
-                                            <!-- Aanbevelingen worden hier ingevuld door JavaScript -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col s12 center-align">
-                                <button id="print-results" class="btn waves-effect waves-light">Afdrukken</button>
-                                <button id="restart-test" class="btn waves-effect waves-light">Opnieuw testen</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
 
     <!-- Materialize JS and jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize Materialize components
-            M.Tabs.init(document.querySelectorAll('.tabs'));
-            M.updateTextFields();
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize Materialize components
+        M.Tabs.init(document.querySelectorAll(".tabs"));
+        M.updateTextFields();
 
-            // Matrix met waarden voor verwerking
-            const analysisMatrix = {
-                'A': {1: 'Macht', 2: 'Taak', 3: 'Rol', 4: 'Individu'},
-                'B': {1: 'Taak', 2: 'Rol', 3: 'Macht', 4: 'Individu'},
-                'C': {1: 'Macht', 2: 'Rol', 3: 'Taak', 4: 'Individu'},
-                'D': {1: 'Taak', 2: 'Individu', 3: 'Rol', 4: 'Macht'},
-                'E': {1: 'Macht', 2: 'Rol', 3: 'Individu', 4: 'Taak'},
-                'F': {1: 'Individu', 2: 'Rol', 3: 'Taak', 4: 'Macht'},
-                'G': {1: 'Individu', 2: 'Macht', 3: 'Rol', 4: 'Taak'},
-                'H': {1: 'Macht', 2: 'Taak', 3: 'Individu', 4: 'Rol'},
-                'I': {1: 'Taak', 2: 'Rol', 3: 'Macht', 4: 'Individu'},
-                'J': {1: 'Individu', 2: 'Taak', 3: 'Rol', 4: 'Macht'}
-            };
+        // Matrix met waarden voor verwerking
+        const analysisMatrix = {
+          A: { 1: "Macht", 2: "Taak", 3: "Rol", 4: "Individu" },
+          B: { 1: "Taak", 2: "Rol", 3: "Macht", 4: "Individu" },
+          C: { 1: "Macht", 2: "Rol", 3: "Taak", 4: "Individu" },
+          D: { 1: "Taak", 2: "Individu", 3: "Rol", 4: "Macht" },
+          E: { 1: "Macht", 2: "Rol", 3: "Individu", 4: "Taak" },
+          F: { 1: "Individu", 2: "Rol", 3: "Taak", 4: "Macht" },
+          G: { 1: "Individu", 2: "Macht", 3: "Rol", 4: "Taak" },
+          H: { 1: "Macht", 2: "Taak", 3: "Individu", 4: "Rol" },
+          I: { 1: "Taak", 2: "Rol", 3: "Macht", 4: "Individu" },
+          J: { 1: "Individu", 2: "Taak", 3: "Rol", 4: "Macht" },
+        };
 
-            // Vragen en bijbehorende aspecten
-            const questionAspects = {
-                'A': 'Besluitvorming',
-                'B': 'Kritiek',
-                'C': 'Doelstellingen',
-                'D': 'Initiatief',
-                'E': 'Conflicten',
-                'F': 'Besluitvorming',
-                'G': 'Kritiek',
-                'H': 'Doelstellingen',
-                'I': 'Initiatief',
-                'J': 'Conflicten'
-            };
+        // Vragen en bijbehorende aspecten
+        const questionAspects = {
+          A: "Besluitvorming",
+          B: "Kritiek",
+          C: "Doelstellingen",
+          D: "Initiatief",
+          E: "Conflicten",
+          F: "Besluitvorming",
+          G: "Kritiek",
+          H: "Doelstellingen",
+          I: "Initiatief",
+          J: "Conflicten",
+        };
 
-            // Globale variabele voor resultaten
-            let results = {
-                current: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 },
-                ideal: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 }
-            };
+        // Globale variabele voor resultaten
+        let results = {
+          current: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 },
+          ideal: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 },
+        };
 
-            // Show only the first question initially
-            const questions = document.querySelectorAll('.question-card');
-            if (questions.length > 0) {
-                questions.forEach((question, index) => {
-                    if (index > 0) {
-                        question.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Start the test button
-            document.getElementById('start-test').addEventListener('click', function() {
-                document.querySelector('.progress-container').classList.remove('hidden');
-                document.getElementById('culture-test').classList.remove('hidden');
-                this.parentNode.parentNode.parentNode.parentNode.classList.add('hidden');
-            });
-
-            // Track question completion
-            const radioInputs = document.querySelectorAll('input[type="radio"]');
-            radioInputs.forEach(input => {
-                input.addEventListener('change', function() {
-                    updateProgress();
-                    const questionName = this.name.split('_')[1];
-                    const currentQuestionCard = document.querySelector(`.question-card[data-question="${questionName}"]`);
-                    
-                    // Check if both current and ideal have been answered
-                    const currentAnswered = document.querySelector(`input[name="current_${questionName}"]:checked`);
-                    const idealAnswered = document.querySelector(`input[name="ideal_${questionName}"]:checked`);
-                    
-                    if (currentAnswered && idealAnswered) {
-                        // Find the next question
-                        const nextQuestionCard = currentQuestionCard.nextElementSibling;
-                        if (nextQuestionCard && nextQuestionCard.classList.contains('question-card')) {
-                            currentQuestionCard.classList.add('hidden');
-                            nextQuestionCard.classList.remove('hidden');
-                            window.scrollTo(0, 0);
-                        }
-                    }
-                });
-            });
-
-            // Update progress bar
-            function updateProgress() {
-                const totalQuestions = 10; // A-J
-                let answered = 0;
-                
-                for (let i = 65; i <= 74; i++) { // ASCII for A-J
-                    const letter = String.fromCharCode(i);
-                    const currentAnswered = document.querySelector(`input[name="current_${letter}"]:checked`);
-                    const idealAnswered = document.querySelector(`input[name="ideal_${letter}"]:checked`);
-                    
-                    if (currentAnswered && idealAnswered) {
-                        answered++;
-                    }
-                }
-                
-                const progressPercentage = (answered / totalQuestions) * 100;
-                document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
-                document.getElementById('current-question').textContent = answered;
-            }
-
-            // Form submission
-            document.getElementById('culture-test').addEventListener('submit', function(e) {
-                e.preventDefault();
-                calculateResults();
-                document.getElementById('culture-test').classList.add('hidden');
-                document.querySelector('.progress-container').classList.add('hidden');
-                document.getElementById('results').classList.remove('hidden');
-                window.scrollTo(0, 0);
-            });
-
-            // Calculate results
-            function calculateResults() {
-                // Reset results
-                results = {
-                    current: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 },
-                    ideal: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 }
-                };
-
-                // Loop through each question (A-J)
-                for (let i = 65; i <= 74; i++) {
-                    const letter = String.fromCharCode(i);
-                    const currentValue = document.querySelector(`input[name="current_${letter}"]:checked`).value;
-                    const idealValue = document.querySelector(`input[name="ideal_${letter}"]:checked`).value;
-                    
-                    // Add to the corresponding culture type based on the analysis matrix
-                    const currentCultureType = analysisMatrix[letter][currentValue];
-                    const idealCultureType = analysisMatrix[letter][idealValue];
-                    
-                    results.current[currentCultureType]++;
-                    results.ideal[idealCultureType]++;
-                }
-
-                // Display results
-                displayResults();
-            }
-
-            // Display results in the UI
-            function displayResults() {
-                // Update the scores lists
-                const currentScoresList = document.getElementById('current-scores');
-                const idealScoresList = document.getElementById('ideal-scores');
-                
-                currentScoresList.innerHTML = '';
-                idealScoresList.innerHTML = '';
-                
-                const cultureTypes = ['Macht', 'Rol', 'Taak', 'Individu'];
-                
-                cultureTypes.forEach(type => {
-                    const currentPercentage = (results.current[type] / 10) * 100;
-                    const idealPercentage = (results.ideal[type] / 10) * 100;
-                    
-                    currentScoresList.innerHTML += `
-                        <li class="collection-item">
-                            <div>${type}<span class="secondary-content">${results.current[type]} (${currentPercentage}%)</span></div>
-                        </li>
-                    `;
-                    
-                    idealScoresList.innerHTML += `
-                        <li class="collection-item">
-                            <div>${type}<span class="secondary-content">${results.ideal[type]} (${idealPercentage}%)</span></div>
-                        </li>
-                    `;
-                });
-
-                // Fill details table
-                const detailsTable = document.getElementById('details-table');
-                detailsTable.innerHTML = '';
-                
-                for (let i = 65; i <= 74; i++) {
-                    const letter = String.fromCharCode(i);
-                    const currentValue = document.querySelector(`input[name="current_${letter}"]:checked`).value;
-                    const idealValue = document.querySelector(`input[name="ideal_${letter}"]:checked`).value;
-                    
-                    const currentCultureType = analysisMatrix[letter][currentValue];
-                    const idealCultureType = analysisMatrix[letter][idealValue];
-                    
-                    const aspect = questionAspects[letter];
-                    const match = currentCultureType === idealCultureType ? 'Ja' : 'Nee';
-                    
-                    detailsTable.innerHTML += `
-                        <tr>
-                            <td>${letter}</td>
-                            <td>${aspect}</td>
-                            <td>${currentCultureType}</td>
-                            <td>${idealCultureType}</td>
-                            <td>${match}</td>
-                        </tr>
-                    `;
-                }
-
-                // Generate recommendations
-                generateRecommendations();
-
-                // Create radar chart
-                createRadarChart();
-            }
-
-            // Create radar chart
-            function createRadarChart() {
-                const ctx = document.getElementById('radar-chart').getContext('2d');
-                
-                const data = {
-                    labels: ['Machtscultuur', 'Rolcultuur', 'Taakcultuur', 'Individucultuur'],
-                    datasets: [
-                        {
-                            label: 'Huidige situatie',
-                            data: [
-                                results.current['Macht'],
-                                results.current['Rol'],
-                                results.current['Taak'],
-                                results.current['Individu']
-                            ],
-                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                            borderColor: 'rgb(54, 162, 235)',
-                            pointBackgroundColor: 'rgb(54, 162, 235)',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: 'rgb(54, 162, 235)'
-                        },
-                        {
-                            label: 'Ideale situatie',
-                            data: [
-                                results.ideal['Macht'],
-                                results.ideal['Rol'],
-                                results.ideal['Taak'],
-                                results.ideal['Individu']
-                            ],
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            pointBackgroundColor: 'rgb(255, 99, 132)',
-                            pointBorderColor: '#fff',
-                            pointHoverBackgroundColor: '#fff',
-                            pointHoverBorderColor: 'rgb(255, 99, 132)'
-                        }
-                    ]
-                };
-                
-                new Chart(ctx, {
-                    type: 'radar',
-                    data: data,
-                    options: {
-                        elements: {
-                            line: {
-                                borderWidth: 3
-                            }
-                        },
-                        scales: {
-                            r: {
-                                angleLines: {
-                                    display: true
-                                },
-                                suggestedMin: 0,
-                                suggestedMax: 10
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Generate recommendations based on results
-            function generateRecommendations() {
-                const recommendationsContent = document.getElementById('recommendations-content');
-                
-                // Find dominant current and ideal culture types
-                const currentDominant = findDominantType(results.current);
-                const idealDominant = findDominantType(results.ideal);
-                
-                let recommendations = '';
-                
-                if (currentDominant === idealDominant) {
-                    recommendations += `<p>Uw huidige dominante cultuurtype (${currentDominant}) komt overeen met uw ideale cultuurtype. Dit suggereert dat u over het algemeen tevreden bent met de huidige organisatiecultuur.</p>`;
-                } else {
-                    recommendations += `<p>Uw huidige dominante cultuurtype is ${currentDominant}, terwijl uw ideale dominante cultuurtype ${idealDominant} is. Hieronder volgen enkele aanbevelingen om de transitie te ondersteunen:</p>`;
-                    
-                    if (idealDominant === 'Macht') {
-                        recommendations += `
-                            <ul class="browser-default">
-                                <li>Versterk de positie van sleutelfiguren in de organisatie.</li>
-                                <li>Focus meer op resultaten dan op processen.</li>
-                                <li>Stimuleer een snelle besluitvorming.</li>
-                                <li>Creëer duidelijkheid over wie de beslissingen neemt.</li>
-                            </ul>
-                        `;
-                    } else if (idealDominant === 'Rol') {
-                        recommendations += `
-                            <ul class="browser-default">
-                                <li>Ontwikkel meer gedetailleerde procedures en richtlijnen.</li>
-                                <li>Zorg voor duidelijke functieomschrijvingen.</li>
-                                <li>Versterk de hiërarchische structuur.</li>
-                                <li>Creëer meer stabiliteit en voorspelbaarheid.</li>
-                            </ul>
-                        `;
-                    } else if (idealDominant === 'Taak') {
-                        recommendations += `
-                            <ul class="browser-default">
-                                <li>Stimuleer teamwerk en interdisciplinaire samenwerking.</li>
-                                <li>Focus op het bereiken van gemeenschappelijke doelstellingen.</li>
-                                <li>Zorg voor flexibiliteit in werkprocessen.</li>
-                                <li>Waardeer en beloon expertise en kennis.</li>
-                            </ul>
-                        `;
-                    } else if (idealDominant === 'Individu') {
-                        recommendations += `
-                            <ul class="browser-default">
-                                <li>Geef meer ruimte voor individuele vrijheid en creativiteit.</li>
-                                <li>Creëer mogelijkheden voor persoonlijke ontwikkeling.</li>
-                                <li>Verminder strikte controle en bureaucratie.</li>
-                                <li>Waardeer unieke bijdragen van individuen.</li>
-                            </ul>
-                        `;
-                    }
-                }
-                
-                // Specific recommendations based on largest gaps
-                const gaps = calculateGaps();
-                
-                if (gaps.length > 0) {
-                    recommendations += `<p>De grootste discrepanties tussen de huidige en ideale situatie zijn:</p><ul class="browser-default">`;
-                    
-                    gaps.forEach(gap => {
-                        recommendations += `<li><strong>${gap.type}:</strong> ${gap.recommendation}</li>`;
-                    });
-                    
-                    recommendations += `</ul>`;
-                }
-                
-                recommendationsContent.innerHTML = recommendations;
-            }
-
-            // Find the dominant culture type
-            function findDominantType(scores) {
-                let maxScore = 0;
-                let dominantType = '';
-                
-                for (const [type, score] of Object.entries(scores)) {
-                    if (score > maxScore) {
-                        maxScore = score;
-                        dominantType = type;
-                    }
-                }
-                
-                return dominantType;
-            }
-
-            // Calculate the largest gaps between current and ideal
-            function calculateGaps() {
-                const gaps = [];
-                
-                for (const type of ['Macht', 'Rol', 'Taak', 'Individu']) {
-                    const gap = results.ideal[type] - results.current[type];
-                    
-                    if (Math.abs(gap) >= 2) {
-                        let recommendation = '';
-                        
-                        if (gap > 0) {
-                            // Need more of this type
-                            if (type === 'Macht') {
-                                recommendation = 'Versterk de centrale leiding en focus meer op resultaten.';
-                            } else if (type === 'Rol') {
-                                recommendation = 'Ontwikkel meer structuur, procedures en duidelijke rollen.';
-                            } else if (type === 'Taak') {
-                                recommendation = 'Versterk de teamgerichte aanpak en focus op gemeenschappelijke doelen.';
-                            } else if (type === 'Individu') {
-                                recommendation = 'Geef meer ruimte voor persoonlijke vrijheid en ontwikkeling.';
-                            }
-                        } else {
-                            // Need less of this type
-                            if (type === 'Macht') {
-                                recommendation = 'Verminder de machtscentralisatie en delegeer meer verantwoordelijkheden.';
-                            } else if (type === 'Rol') {
-                                recommendation = 'Verminder bureaucratie en rigide procedures.';
-                            } else if (type === 'Taak') {
-                                recommendation = 'Zorg voor meer balans tussen teamwerk en individuele bijdragen.';
-                            } else if (type === 'Individu') {
-                                recommendation = 'Stimuleer meer samenwerking en gemeenschappelijke doelen.';
-                            }
-                        }
-                        
-                        gaps.push({
-                            type: type,
-                            gap: gap,
-                            recommendation: recommendation
-                        });
-                    }
-                }
-                
-                // Sort by absolute gap size (largest first)
-                gaps.sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap));
-                
-                return gaps.slice(0, 3); // Return top 3 gaps
-            }
-
-            // Print results
-            document.getElementById('print-results').addEventListener('click', function() {
-                window.print();
-            });
-
-            // Restart test
-            document.getElementById('restart-test').addEventListener('click', function() {
-                location.reload();
-            });
+        // Show only the first question initially
+        const questions = document.querySelectorAll(".question-card");
+        questions.forEach((question, index) => {
+          if (index > 0) {
+            question.classList.add("hidden");
+          }
         });
+
+        // Start de test button
+        document
+          .getElementById("start-test")
+          .addEventListener("click", function () {
+            document
+              .querySelector(".progress-container")
+              .classList.remove("hidden");
+            document.getElementById("culture-test").classList.remove("hidden");
+            document.getElementById("welcome-section").classList.add("hidden");
+            window.scrollTo(0, 0);
+          });
+
+        // Track question completion
+        const radioInputs = document.querySelectorAll('input[type="radio"]');
+        radioInputs.forEach((input) => {
+          input.addEventListener("change", function () {
+            updateProgress();
+            const questionName = this.name.split("_")[1];
+            const currentQuestionCard = document.querySelector(
+              `.question-card[data-question="${questionName}"]`
+            );
+            // Check if both current and ideal have been answered for this question
+            const currentAnswered = document.querySelector(
+              `input[name="current_${questionName}"]:checked`
+            );
+            const idealAnswered = document.querySelector(
+              `input[name="ideal_${questionName}"]:checked`
+            );
+
+            if (currentAnswered && idealAnswered) {
+              const nextQuestionCard = currentQuestionCard.nextElementSibling;
+              if (
+                nextQuestionCard &&
+                nextQuestionCard.classList.contains("question-card")
+              ) {
+                currentQuestionCard.classList.add("hidden");
+                nextQuestionCard.classList.remove("hidden");
+                window.scrollTo(0, 0);
+              }
+            }
+          });
+        });
+
+        // Update progress bar
+        function updateProgress() {
+          const totalQuestions = 10;
+          let answered = 0;
+          for (let i = 65; i <= 74; i++) {
+            const letter = String.fromCharCode(i);
+            const currentAnswered = document.querySelector(
+              `input[name="current_${letter}"]:checked`
+            );
+            const idealAnswered = document.querySelector(
+              `input[name="ideal_${letter}"]:checked`
+            );
+            if (currentAnswered && idealAnswered) {
+              answered++;
+            }
+          }
+          const progressPercentage = (answered / totalQuestions) * 100;
+          document.getElementById(
+            "progress-bar"
+          ).style.width = `${progressPercentage}%`;
+          document.getElementById("current-question").textContent = answered;
+        }
+
+        // Calculate results when button is clicked
+        document
+          .getElementById("calculate-results-btn")
+          .addEventListener("click", function () {
+            calculateResults();
+          });
+
+        // Calculate results
+        function calculateResults() {
+          let allAnswered = true;
+          for (let i = 65; i <= 74; i++) {
+            const letter = String.fromCharCode(i);
+            const currentAnswered = document.querySelector(
+              `input[name="current_${letter}"]:checked`
+            );
+            const idealAnswered = document.querySelector(
+              `input[name="ideal_${letter}"]:checked`
+            );
+            if (!currentAnswered || !idealAnswered) {
+              allAnswered = false;
+              break;
+            }
+          }
+          if (!allAnswered) {
+            M.toast({
+              html: "Beantwoord alle vragen voordat u de resultaten berekent",
+              classes: "red",
+              displayLength: 3000,
+            });
+            return;
+          }
+
+          // Reset results
+          results = {
+            current: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 },
+            ideal: { Macht: 0, Rol: 0, Taak: 0, Individu: 0 },
+          };
+
+          for (let i = 65; i <= 74; i++) {
+            const letter = String.fromCharCode(i);
+            const currentValue = document.querySelector(
+              `input[name="current_${letter}"]:checked`
+            ).value;
+            const idealValue = document.querySelector(
+              `input[name="ideal_${letter}"]:checked`
+            ).value;
+            const currentCultureType = analysisMatrix[letter][currentValue];
+            const idealCultureType = analysisMatrix[letter][idealValue];
+            results.current[currentCultureType]++;
+            results.ideal[idealCultureType]++;
+          }
+          displayResults();
+          document.getElementById("culture-test").classList.add("hidden");
+          document.querySelector(".progress-container").classList.add("hidden");
+          document.getElementById("results").classList.remove("hidden");
+          window.scrollTo(0, 0);
+        }
+
+        // Display results in the UI
+        function displayResults() {
+          const currentScoresList = document.getElementById("current-scores");
+          const idealScoresList = document.getElementById("ideal-scores");
+          currentScoresList.innerHTML = "";
+          idealScoresList.innerHTML = "";
+          const cultureTypes = ["Macht", "Rol", "Taak", "Individu"];
+
+          cultureTypes.forEach((type) => {
+            const currentPercentage = (results.current[type] / 10) * 100;
+            const idealPercentage = (results.ideal[type] / 10) * 100;
+            currentScoresList.innerHTML += `
+              <li class="collection-item">
+                <div>${type}<span class="secondary-content">${results.current[type]} (${currentPercentage}%)</span></div>
+              </li>
+            `;
+            idealScoresList.innerHTML += `
+              <li class="collection-item">
+                <div>${type}<span class="secondary-content">${results.ideal[type]} (${idealPercentage}%)</span></div>
+              </li>
+            `;
+          });
+
+          // Fill details table
+          const detailsTable = document.getElementById("details-table");
+          detailsTable.innerHTML = "";
+          for (let i = 65; i <= 74; i++) {
+            const letter = String.fromCharCode(i);
+            const currentValue = document.querySelector(
+              `input[name="current_${letter}"]:checked`
+            ).value;
+            const idealValue = document.querySelector(
+              `input[name="ideal_${letter}"]:checked`
+            ).value;
+            const currentCultureType = analysisMatrix[letter][currentValue];
+            const idealCultureType = analysisMatrix[letter][idealValue];
+            const aspect = questionAspects[letter];
+            detailsTable.innerHTML += `
+              <tr>
+                <td>${letter}</td>
+                <td>${aspect}</td>
+                <td>${currentCultureType}</td>
+                <td>${idealCultureType}</td>
+              </tr>
+            `;
+          }
+          generateRecommendations();
+        }
+
+        // Generate recommendations based on results
+        function generateRecommendations() {
+          const recommendationsContent = document.getElementById(
+            "recommendations-content"
+          );
+          const currentDominant = findDominantType(results.current);
+          const idealDominant = findDominantType(results.ideal);
+          let recommendations = "";
+
+          if (currentDominant === idealDominant) {
+            recommendations += `<p>Uw huidige dominante cultuurtype (${currentDominant}) komt overeen met uw ideale cultuurtype. Dit suggereert dat u over het algemeen tevreden bent met de huidige organisatiecultuur.</p>`;
+          } else {
+            recommendations += `<p>Uw huidige dominante cultuurtype is ${currentDominant}, terwijl uw ideale dominante cultuurtype ${idealDominant} is. Hieronder volgen enkele aanbevelingen om de transitie te ondersteunen:</p>`;
+            if (idealDominant === "Macht") {
+              recommendations += `
+                <ul class="browser-default">
+                  <li>Versterk de positie van sleutelfiguren in de organisatie.</li>
+                  <li>Focus meer op resultaten dan op processen.</li>
+                  <li>Stimuleer een snelle besluitvorming.</li>
+                  <li>Creëer duidelijkheid over wie de beslissingen neemt.</li>
+                </ul>
+              `;
+            } else if (idealDominant === "Rol") {
+              recommendations += `
+                <ul class="browser-default">
+                  <li>Ontwikkel meer gedetailleerde procedures en richtlijnen.</li>
+                  <li>Zorg voor duidelijke functieomschrijvingen.</li>
+                  <li>Versterk de hiërarchische structuur.</li>
+                  <li>Creëer meer stabiliteit en voorspelbaarheid.</li>
+                </ul>
+              `;
+            } else if (idealDominant === "Taak") {
+              recommendations += `
+                <ul class="browser-default">
+                  <li>Stimuleer teamwerk en interdisciplinaire samenwerking.</li>
+                  <li>Focus op het bereiken van gemeenschappelijke doelstellingen.</li>
+                  <li>Zorg voor flexibiliteit in werkprocessen.</li>
+                  <li>Waardeer en beloon expertise en kennis.</li>
+                </ul>
+              `;
+            } else if (idealDominant === "Individu") {
+              recommendations += `
+                <ul class="browser-default">
+                  <li>Geef meer ruimte voor individuele vrijheid en creativiteit.</li>
+                  <li>Creëer mogelijkheden voor persoonlijke ontwikkeling.</li>
+                  <li>Verminder strikte controle en bureaucratie.</li>
+                  <li>Waardeer unieke bijdragen van individuen.</li>
+                </ul>
+              `;
+            }
+          }
+
+          // Specific recommendations based on largest gaps
+          const gaps = calculateGaps();
+          if (gaps.length > 0) {
+            recommendations += `<p>De grootste discrepanties tussen de huidige en ideale situatie zijn:</p><ul class="browser-default">`;
+            gaps.forEach((gap) => {
+              recommendations += `<li><strong>${gap.type}:</strong> ${gap.recommendation}</li>`;
+            });
+            recommendations += `</ul>`;
+          }
+          recommendationsContent.innerHTML = recommendations;
+        }
+
+        // Find the dominant culture type
+        function findDominantType(scores) {
+          let maxScore = 0;
+          let dominantType = "";
+          for (const [type, score] of Object.entries(scores)) {
+            if (score > maxScore) {
+              maxScore = score;
+              dominantType = type;
+            }
+          }
+          return dominantType;
+        }
+
+        // Calculate the largest gaps between current and ideal
+        function calculateGaps() {
+          const gaps = [];
+          for (const type of ["Macht", "Rol", "Taak", "Individu"]) {
+            const gap = results.ideal[type] - results.current[type];
+            if (Math.abs(gap) >= 2) {
+              let recommendation = "";
+              if (gap > 0) {
+                if (type === "Macht") {
+                  recommendation =
+                    "Versterk de centrale leiding en focus meer op resultaten.";
+                } else if (type === "Rol") {
+                  recommendation =
+                    "Ontwikkel meer structuur, procedures en duidelijke rollen.";
+                } else if (type === "Taak") {
+                  recommendation =
+                    "Versterk de teamgerichte aanpak en focus op gemeenschappelijke doelen.";
+                } else if (type === "Individu") {
+                  recommendation =
+                    "Geef meer ruimte voor persoonlijke vrijheid en ontwikkeling.";
+                }
+              } else {
+                if (type === "Macht") {
+                  recommendation =
+                    "Verminder de machtscentralisatie en delegeer meer verantwoordelijkheden.";
+                } else if (type === "Rol") {
+                  recommendation =
+                    "Verminder bureaucratie en rigide procedures.";
+                } else if (type === "Taak") {
+                  recommendation =
+                    "Zorg voor meer balans tussen teamwerk en individuele bijdragen.";
+                } else if (type === "Individu") {
+                  recommendation =
+                    "Stimuleer meer samenwerking en gemeenschappelijke doelen.";
+                }
+              }
+              gaps.push({
+                type: type,
+                gap: gap,
+                recommendation: recommendation,
+              });
+            }
+          }
+          gaps.sort((a, b) => Math.abs(b.gap) - Math.abs(a.gap));
+          return gaps.slice(0, 3);
+        }
+
+        // Print results
+        document
+          .getElementById("print-results")
+          .addEventListener("click", function () {
+            window.print();
+          });
+
+        // Restart test
+        document
+          .getElementById("restart-test")
+          .addEventListener("click", function () {
+            location.reload();
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
